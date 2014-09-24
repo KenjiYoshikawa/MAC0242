@@ -16,3 +16,9 @@ class ListaTabela:
 
     def add_tabela(self, tabela):
         self.list.append(tabela)
+
+    def find_nome(self, nome):
+        for tabela in self.list:
+            if (tabela.nome == nome):
+                return True
+        return False
