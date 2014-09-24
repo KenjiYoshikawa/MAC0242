@@ -2,13 +2,13 @@
 class Tabela:
     def __init__(self, nome):
         self.nome = nome
-        self.referencias = list()
+        self.dependencias = list()
 
-    def add_referencia(self, referencia):
-        self.referencias.append(referencia)
+    def add_dependencias(self, dependencias):
+        self.dependencias = dependencias
 
-    def get_referencias(self):
-        return len(self.referencias)
+    def get_dependencias(self):
+        return len(self.dependencias)
 
 class ListaTabela:
     def __init__(self):

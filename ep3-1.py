@@ -6,6 +6,7 @@ from tabela import Tabela, ListaTabela
 def main():
     sqlIgnore = re.compile("^[--].*")
     regexNomeTabela = re.compile("CREATE TABLE ([^\s]+)")
+    regexDependencia = re.compile("REFERENCES ([^\s]+)")
 
     try:
         estrutura = open(args.fileName, "r")
@@ -21,11 +22,16 @@ def main():
             linha = linha + line
             if (';' in line):
                 linha = linha.replace('\n', ' ')
-                teste = regexNomeTabela.search(linha)
-                if(teste != None):
-                    tabela = Tabela(teste.group(1)[1:-1])
+                nome = regexNomeTabela.search(linha)
+                dependencias = regexDependencia.findall(linha)
+                if(nome != None):
+                    tabela = Tabela(nome.group(1)[1:-1])
                     listaTabela.add_tabela(tabela)
+                    tabela.add_dependencias([d[1:-1] for d in dependencias])
                 linha = ""
+
+    for u in listaTabela.list:
+        print (u.nome, u.dependencias)
 
 
 
